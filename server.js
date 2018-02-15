@@ -1,6 +1,7 @@
 //Get all the dependency
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 //Get express instance 
 var app = express();
@@ -22,8 +23,11 @@ db.once('open', function() {
 //Router
 var userRoute = require('./routes/user.routes');
 
-//Listen on '/' route
-app.use('/', userRoute);
+//Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+//Routes
+app.use('/users', userRoute);
 
 app.listen(port, function () {
     console.log('listening on port ' + port);
