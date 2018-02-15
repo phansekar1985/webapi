@@ -9,7 +9,7 @@ var app = express();
 //Set PORT
 var port = process.env.PORT || 4000;
 
-var config = require('./db/config');
+var config = require('./db.config');
 var connectionStr = 'mongodb://' + config.username + ':' + config.password + '@' + config.database.url + '/' +
     config.database.table;
 
@@ -21,13 +21,13 @@ db.once('open', function() {
 });
 
 //Router
-var userRoute = require('./routes/user.routes');
+var getUserRoute = require('./routes/users/get/user.routes');
 
 //Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //Routes
-app.use('/users', userRoute);
+app.use('/users', getUserRoute);
 
 app.listen(port, function () {
     console.log('listening on port ' + port);
