@@ -21,13 +21,15 @@ db.once('open', function() {
 });
 
 //Router
-var getUserRoute = require('./routes/users/get/user.routes');
+var getUserRoute = require('./routes/users/get_user');
+var postUserRoute = require('./routes/users/post_user');
 
 //Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //Routes
 app.use('/users', getUserRoute);
+app.use('/users', postUserRoute);
 
 app.listen(port, function () {
     console.log('listening on port ' + port);
