@@ -9,15 +9,15 @@ module.exports = function (req, res) {
     //Check if user exists
     userModel.findOne({ email: req.body.email }, '', function (err, user) {
         if (err) {
-            res.json(resposeToUser(false, err));
+            res.status(422).json(resposeToUser(false, err));
             return;
         }
         else if (user) {
-            res.json(resposeToUser(false, 'User already exists!!'));
+            res.status(422).json(resposeToUser(false, 'User already exists!!'));
             return;
         } else {
             if (!req.body.email || !req.body.password) {
-                res.json(resposeToUser(false, 'Email or password is empty!!'));
+                res.status(422).json(resposeToUser(false, 'Email or password is empty!!'));
                 return;
             }
         
@@ -30,7 +30,7 @@ module.exports = function (req, res) {
         
             user.save(function (err, user) {
                 if (!err) {
-                    res.json(resposeToUser(true, 'Record created!!', { id: user._id }));
+                    res.status(201).json(resposeToUser(true, 'Record created!!', { id: user._id }));
                 } else {
                     res.json(resposeToUser(false, 'Error - ' + err));
                 }
