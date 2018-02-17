@@ -11,7 +11,7 @@ module.exports = function (req, res, next) {
         // verifies secret and checks exp
         jwt.verify(token, config.authKey, function (err, decoded) {
             if (err) {
-                return res.json(responseToUser(false, 'Failed to authenticate token.'));
+                return res.status(403).json(responseToUser(false, 'Failed to authenticate token.'));
             } else {
                 //if everything is good, save to request for use in other routes
                 req.decoded = decoded;
