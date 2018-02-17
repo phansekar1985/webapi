@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var userCtrl = require('../controller/users/create_user.ctrl');
+var registerUserCtrl = require('../controller/users/register_user.ctrl');
 
 //POST - Create user
-module.exports = router.post('/user/register', userCtrl);
+module.exports = router.post('/user/register', registerUserCtrl);
